@@ -14,6 +14,11 @@
 $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
+function debug($arg)
+{
+    $str = is_string($arg)?$arg:var_export($arg,true);
+    Log::debug($str);
+}
 
 /*
 |--------------------------------------------------------------------------
