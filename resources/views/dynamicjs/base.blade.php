@@ -16,14 +16,11 @@ base.post = function(url,payload,callback,loading)
         dataType:'json',
         method:'post',
         headers:headers
-    })
-        .done(function(response){
-            if(typeof(callback) == 'function') callback(response);
-        })
-        .fail(function(err){
-            Alert.error(err,'BECK-END ERROR!!!');
-        })
-        .always(function(){
-            if(!loading) base.loading.show(false);
-        });
+    }).done(function(response){
+        if(typeof(callback) == 'function') callback(response);
+    }).fail(function(err){
+        Alert.error(err,'BECK-END ERROR!!!');
+    }).always(function(){
+        if(!loading) base.loading.show(false);
+    });
 }

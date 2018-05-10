@@ -5,7 +5,7 @@
         border-radius: 5px;
         border: 2px solid rgba(95, 95, 95, 0.9);
         background-color: #FFFFFF;
-        top: 25vw;
+        top: 10vw;
         padding: 3em;
     }
 </style>

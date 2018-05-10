@@ -1,5 +1,6 @@
 @extends('shared.masterpage')
 @section('custom_head')
+    <link rel="icon" href="{{ asset('assets/pandapix/img/favicon.png') }}">    
     <link rel="stylesheet" href="{{ asset('assets/src/css/dashboard.css') }}">
 @stop
 @section('maincontainer')
@@ -26,8 +27,12 @@
                     <a class="nav-link" href="#">Help</a>
                 </li>
             </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="#" class="nav-link">Sair</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">nome do Cliente</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Usuario logado</a></li>
+            </ul>
         </div>
-        <span class="text-right white">Nome do cliente</span>
     </nav>
     
     <div class="container-fluid">
