@@ -26,4 +26,9 @@ class PainelController extends Controller
         Auth::guard('web')->logout(false);
         return redirect()->route('site.home');
     }
+
+    public function mailTest(Request $request)
+    {
+        return $this->_callService('PainelService', 'sendMail', $request->all());
+    }
 }

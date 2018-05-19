@@ -3,12 +3,14 @@
 namespace App\Traits;
 
 use Validator;
+use App\Mail\StandardMailBuilder;
+use Illuminate\Support\Facades\Mail;
 use App\Exceptions\NegocioException;
 
 trait HelperTrait
 {
     /**
-     * default sistem validator for throlling erros
+     * default sistem validator for throlling erros (use only in service context)
      * @param @data array with response data
      * @param @rules array of validation rules mandatory
      * @param @names array of bind :attibute param on string message nom mandatory
@@ -24,5 +26,24 @@ trait HelperTrait
                 throw new NegocioException($message);
             }
         }
+    }
+
+    /**
+     * default sistem mail sender to easely send messages
+     * @param $to string e-mail address to 
+     * @param $view string name to view mail
+     * @param $data array payload data to set variables in view (optional)
+     * @param $withbcc boolean to include hidden recipier to e-mail configured in pandapix.php in config section
+     * @return $this context
+     */
+    public function _sendEmail($subject, $to, $view, array $data = [], $withbcc = false)
+    {
+        $mail = Mail::to($to);
+
+        if($withbcc) $mail->bcc(config('pandapix.emails.bcc'));
+
+        $mail->send(new StandardMailBuilder($subject, $view, $data));
+
+        return $this;
     }
 }

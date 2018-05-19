@@ -43,7 +43,7 @@ class LoginService extends BaseService
         $user->usu_ultimo_acesso = date('Y-m-d H:i:s');
         $user->save();
 
-        Auth::guard('web')->login($usuarioMakeLogin, false);
+        Auth::guard('web')->login($usuarioMakeLogin, false/*this false attribut is to disable remember token feature*/);
 
         if(!Auth::user()) throw new NegocioException('Erro ao efetuar login');
 

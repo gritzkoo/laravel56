@@ -19,7 +19,8 @@ base.post = function(url,payload,callback,loading)
     }).done(function(response){
         if(typeof(callback) == 'function') callback(response);
     }).fail(function(err){
-        Alert.error(err,'BECK-END ERROR!!!');
+        console.log(err);
+        Alert.error('Ocorreu um erro, contate o administrador do sistema!!!', 'Ops...');
     }).always(function(){
         if(!loading) base.loading.show(false);
     });

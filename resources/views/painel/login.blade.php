@@ -46,8 +46,7 @@
             });
             me.usu_senha = ko.observable().extend({
                 required:{message:'O campo senha é obrigatório'},
-                maxLenght:{params:16,message:'O campo senha tem tamanho máximo de 16 caracteres'},
-                minLength:{params:6, message:'O campo senha tem tamanho mínimo de 6 caracteres'}
+                maxLenght:{params:16,message:'O campo senha tem tamanho máximo de 16 caracteres'}
             });
             me.erros = ko.validation.group(me);
 
