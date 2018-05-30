@@ -46,4 +46,12 @@ trait HelperTrait
 
         return $this;
     }
+
+    /**
+     * if folder does not exists, make it happen!.. have fun ;)
+     */
+    public function _checkIfFolderExists($path)
+    {
+        if(!is_dir($path)) mkdir($path,751);
+    }
 }

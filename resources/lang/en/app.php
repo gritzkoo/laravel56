@@ -1,31 +1,22 @@
 <?php
-/** esse arquivo é auto gerado */
- return array (
-  'tela1' => 
-  array (
-    'labels' => 
-    array (
-      'save' => 'Save',
-      'no' => 'No',
-      'gaz' => 'Baba',
-      'agua' => 'Water',
-    ),
-  ),
-  'standards' => 
-  array (
-    'labels' => 
-    array (
-      'save' => 'Save',
-      'ok' => 'OK',
-      'no' => 'No',
+/**
+ * ESSE ARQUIVO É AUTO GERADO
+ * POR FAVOR NAO EDITE ESSE DOCUMENTO
+ * EDITE OS DADOS NA TABELA translations E O MESMO SERÁ 
+ * RECRIADO COM A CHAMADA DE UM SERVIÇO
+ */
+ return [
+  'apc' => [
+    'lables' => [
+      'greetins' => 'Hi! here you can put every thing you can imagin',
+    ],
+  ],
+  'standards' => [
+    'buttons' => [
       'back' => 'Back',
-    ),
-    'button' => 
-    array (
-      'save' => 'Save',
+      'cancel' => 'Cancelar',
       'ok' => 'OK',
-      'no' => 'No',
-      'back' => 'Back',
-    ),
-  ),
-);
+      'yes' => 'Yes',
+    ],
+  ],
+];

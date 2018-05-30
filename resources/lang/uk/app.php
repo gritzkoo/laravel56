@@ -8,15 +8,15 @@
  return [
   'apc' => [
     'lables' => [
-      'greetins' => 'Ola aqui você pode colocar qualquer coisa ',
+      'greetins' => '',
     ],
   ],
   'standards' => [
     'buttons' => [
-      'back' => 'Voltar',
-      'cancel' => 'Cancelar',
-      'ok' => 'OK',
-      'yes' => 'Sim',
+      'back' => '',
+      'cancel' => '',
+      'ok' => '',
+      'yes' => '',
     ],
   ],
 ];

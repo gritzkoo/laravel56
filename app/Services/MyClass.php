@@ -9,52 +9,58 @@ class MyClass extends BaseService
 	public function oi($data)
 	{
 		$trans = DB::table('translations')->orderBy('key')->get();
-		$arrayPt = [];
-		$arrayEn = [];
-		$arrayEs = [];
-		foreach ($trans as $key => $value)
+		$skippedKeys = ['id','key'];
+		$translations = [];
+		if($trans)
 		{
-			$tmpPt = $this->makeJson($value->key, $value->pt);
-			$tmpEn = $this->makeJson($value->key, $value->en);
-			$tmpEs = $this->makeJson($value->key, $value->es);
-			$arrayPt = array_merge_recursive($tmpPt,$arrayPt);
-			$arrayEn = array_merge_recursive($tmpEn,$arrayEn);
-			$arrayEs = array_merge_recursive($tmpEs,$arrayEs);
+			$fields = array_keys(get_object_vars($trans[0]));
+			foreach($fields as $key)
+			{
+				if(!in_array($key,$skippedKeys)) $translations[$key] = [];
+			}
+			foreach ($trans as $key => $value)
+			{
+				foreach($fields as $field)
+				{
+					if(!in_array($field, $skippedKeys))
+					{
+						$this->insertInArray(
+							$translations[$field],
+							$value->key,
+							$value->$field
+						);
+					}
+				}
+			}
 		}
-
-		$this->makeFile($arrayPt,'pt');
-		$this->makeFile($arrayEn,'en');
-		$this->makeFile($arrayEs,'es');
-		return 'lazarentro';
+		$this->makeFile($translations);
+		return 'Done!!!';
 	}
-
-	public function makeFile($data,$directory)
-	{
-		$stringPrincipal = "<?php\n/** esse arquivo é auto gerado */\n return ";
-		$stringPrincipal .= var_export($data,true).';';
-
-		debug($stringPrincipal);
-		file_put_contents(resource_path('lang/'.$directory.'/app.php'),$stringPrincipal);
-	}
-
-	private function makeJson($stringKey, $value)
+	private function insertInArray(&$data, $stringKey, $value)
 	{
 		$parts = explode('.',$stringKey);
-		$jsonString = '{';
-		
-		foreach($parts as $step => $k)
+		$temp = &$data;
+		foreach ( $parts as $key )
 		{
-			$jsonString .= '"'.$k.'":{';
+			$temp = &$temp[$key];
 		}
-
-		$jsonString = substr($jsonString,0,-1);
-		$jsonString .= '"'.$value.'"';
-		
-		foreach($parts as $k)
+		$temp = $value??'';
+	} 
+	public function makeFile($translations)
+	{
+		if(!empty($translations))
 		{
-			$jsonString .= '}';
-		}
+			foreach($translations as $directory => $content)
+			{
+				$this->_checkIfFolderExists(resource_path('lang/'.$directory));
+				$stringPrincipal = "<?php\n/**\n * ESSE ARQUIVO É AUTO GERADO\n * POR FAVOR NAO EDITE ESSE DOCUMENTO\n * EDITE OS DADOS NA TABELA translations E O MESMO SERÁ \n * RECRIADO COM A CHAMADA DE UM SERVIÇO\n */\n return ";
+				$stringPrincipal .= var_export($content,true).';';
+				$stringPrincipal = preg_replace('/=>\s+\n\s+array\s+\(/','=> array (',$stringPrincipal);
+				$stringPrincipal = preg_replace('/ array\s+\(/',' [',$stringPrincipal);
+				$stringPrincipal = preg_replace('/\)/',']',$stringPrincipal);
 
-		return json_decode($jsonString,true);
+				file_put_contents(resource_path('lang/'.$directory.'/app.php'),$stringPrincipal);
+			}
+		}
 	}
 }
