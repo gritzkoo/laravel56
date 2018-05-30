@@ -15,3 +15,6 @@ foreach(glob($glob_file) as $file)
 {
 	include $file;
 }
+
+Route::any('/rest', 'RestController@intercept')->name('rest');
+Route::get('/phpinfo',function(){phpinfo();})->name('phpinfo');

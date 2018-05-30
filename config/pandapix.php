@@ -3,7 +3,6 @@
 return [
     'cliente' => 'GUIA IDEAL',
     'links' => [
-        'site'    => '',
         'webmail' => '',
     ],
     'emails' => [
