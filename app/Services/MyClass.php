@@ -34,7 +34,7 @@ class MyClass extends BaseService
 			}
 		}
 		$this->makeFile($translations);
-		return 'Done!!!';
+		return trans('app.apc.lables.greetins',['name'=>'lazarento']);
 	}
 	private function insertInArray(&$data, $stringKey, $value)
 	{
@@ -44,7 +44,7 @@ class MyClass extends BaseService
 		{
 			$temp = &$temp[$key];
 		}
-		$temp = $value??'';
+		$temp = $value ?? 'undefined key on database';
 	} 
 	public function makeFile($translations)
 	{

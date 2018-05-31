@@ -8,15 +8,15 @@
  return [
   'apc' => [
     'lables' => [
-      'greetins' => '',
+      'greetins' => 'undefined key on database',
     ],
   ],
   'standards' => [
     'buttons' => [
-      'back' => '',
-      'cancel' => '',
-      'ok' => '',
-      'yes' => '',
+      'back' => 'undefined key on database',
+      'cancel' => 'undefined key on database',
+      'ok' => 'undefined key on database',
+      'yes' => 'undefined key on database',
     ],
   ],
 ];

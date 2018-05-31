@@ -8,7 +8,7 @@
  return [
   'apc' => [
     'lables' => [
-      'greetins' => 'Ola aqui você pode colocar qualquer coisa ',
+      'greetins' => 'Ola aqui você pode colocar :name qualquer coisa ',
     ],
   ],
   'standards' => [
