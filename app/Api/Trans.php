@@ -5,33 +5,28 @@ class Trans
     public function exec()
     {
         $this->list = [];
-        $this
-            ->process(trans('auth'), 'auth')
-            ->process(trans('pagination'), 'pagination')
-            ->process(trans('passwords'), 'passwords')
-            ->process(trans('validation'), 'validation');
+        $this->process('auth')
+            ->process('pagination')
+            ->process('passwords')
+            ->process('validation');
         debug($this->list);
     }
-    public function process($list, $name)
+    public function process($name)
     {
-        foreach ($list as $chave => $valor) {
+        foreach (trans($name) as $chave => $valor) {
             $_chave = $name.'.'.$chave;
-            if (is_array($valor)) {
-                $this->getValue($valor, $_chave);
-            } else {
-                $this->list[$_chave] = $valor;
-            }
+            is_array($valor) 
+                ? $this->getValue($valor, $_chave)
+                : $this->list[$_chave] = $valor;
         }
         return $this;
     }
     private function getValue($valor, $_chave)
     {
         foreach ($valor as $key => $val) {
-            if (is_array($val)) {
-                $this->getValue($val, ($_chave.'.'.$key));
-            } else {
-                $this->list[$_chave.'.'.$key] = $val;
-            }
+            is_array($val)
+                ? $this->getValue($val, ($_chave . '.' . $key))
+                : $this->list[$_chave . '.' . $key] = $val;
         }
     }
 }
